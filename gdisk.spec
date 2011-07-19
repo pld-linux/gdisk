@@ -7,9 +7,9 @@ Group:		Base
 URL:		http://www.rodsbooks.com/gdisk/
 Source0:	http://downloads.sourceforge.net/gptfdisk/gptfdisk-%{version}.tar.gz
 BuildRequires:	libicu-devel
+BuildRequires:	libstdc++-devel
 BuildRequires:	libuuid-devel
 BuildRequires:	popt-devel
-BuildRequires:	libstdc++-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -29,16 +29,18 @@ tables, and the ability to convert MBR disks to GPT format.
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man8}
-install -p gdisk sgdisk $RPM_BUILD_ROOT%{_sbindir}
-cp -p gdisk.8 sgdisk.8 $RPM_BUILD_ROOT%{_mandir}/man8
+install -p gdisk sgdisk fixparts $RPM_BUILD_ROOT%{_sbindir}
+cp -p gdisk.8 sgdisk.8 fixparts.8 $RPM_BUILD_ROOT%{_mandir}/man8
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README
+%doc README NEWS
+%attr(755,root,root) %{_sbindir}/fixparts
 %attr(755,root,root) %{_sbindir}/gdisk
 %attr(755,root,root) %{_sbindir}/sgdisk
+%{_mandir}/man8/fixparts.8*
 %{_mandir}/man8/gdisk.8*
 %{_mandir}/man8/sgdisk.8*
