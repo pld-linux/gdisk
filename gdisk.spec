@@ -6,6 +6,7 @@ License:	GPL v2
 Group:		Base
 URL:		http://www.rodsbooks.com/gdisk/
 Source0:	http://downloads.sourceforge.net/gptfdisk/gptfdisk-%{version}.tar.gz
+# Source0-md5:	31deeb7acb5104d56ba2ddeafd907513
 BuildRequires:	libicu-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libuuid-devel
