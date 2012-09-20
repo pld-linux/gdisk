@@ -1,15 +1,16 @@
 Summary:	An fdisk-like partitioning tool for GPT disks
 Name:		gdisk
-Version:	0.7.2
-Release:	3
+Version:	0.8.5
+Release:	1
 License:	GPL v2
 Group:		Base
-URL:		http://www.rodsbooks.com/gdisk/
 Source0:	http://downloads.sourceforge.net/gptfdisk/gptfdisk-%{version}.tar.gz
-# Source0-md5:	31deeb7acb5104d56ba2ddeafd907513
+# Source0-md5:	fbff65ea54638a4cb37878f05c178c3a
+URL:		http://www.rodsbooks.com/gdisk/
 BuildRequires:	libicu-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libuuid-devel
+BuildRequires:	ncurses-devel
 BuildRequires:	popt-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -25,7 +26,7 @@ tables, and the ability to convert MBR disks to GPT format.
 %build
 %{__make} \
 	CXX="%{__cxx}" \
-	CXXFLAGS="%{rpmcxxflags} -D_FILE_OFFSET_BITS=64"
+	CXXFLAGS="%{rpmcxxflags} -D_FILE_OFFSET_BITS=64 -I/usr/include/ncurses"
 
 %install
 rm -rf $RPM_BUILD_ROOT
