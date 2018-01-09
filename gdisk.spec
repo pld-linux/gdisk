@@ -1,15 +1,15 @@
 Summary:	An fdisk-like partitioning tool for GPT disks
 Summary(pl.UTF-8):	Podobne do fdiska narzędzie do partycjonowania dysków GPT
 Name:		gdisk
-Version:	0.8.7
-Release:	9
+Version:	1.0.3
+Release:	1
 License:	GPL v2
 Group:		Base
 Source0:	http://downloads.sourceforge.net/gptfdisk/gptfdisk-%{version}.tar.gz
-# Source0-md5:	005b45c0b37c37a99024704fdb2ee610
+# Source0-md5:	07b625a583b66c8c5840be5923f3e3fe
 Patch0:		%{name}-link.patch
 URL:		http://www.rodsbooks.com/gdisk/
-BuildRequires:	libicu-devel
+#BuildRequires:	libicu-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libuuid-devel
 BuildRequires:	ncurses-devel
@@ -32,28 +32,28 @@ formatu GPT.
 
 %prep
 %setup -q -n gptfdisk-%{version}
-%patch0 -p1
+# since 0.8.9 libicu for UTF-16 support is optional
+#%patch0 -p1
 
 %build
 %{__make} \
 	CXX="%{__cxx}" \
-	CXXFLAGS="%{rpmcxxflags} %{rpmcppflags} -D_FILE_OFFSET_BITS=64 -DUSE_UTF16 -I/usr/include/ncurses"
+	CXXFLAGS="%{rpmcxxflags} %{rpmcppflags} -D_FILE_OFFSET_BITS=64"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man8}
-install -p gdisk sgdisk fixparts $RPM_BUILD_ROOT%{_sbindir}
-cp -p gdisk.8 sgdisk.8 fixparts.8 $RPM_BUILD_ROOT%{_mandir}/man8
+
+install fixparts *gdisk $RPM_BUILD_ROOT%{_sbindir}
+install -p *.8 $RPM_BUILD_ROOT%{_mandir}/man8
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README NEWS
+%doc NEWS README *.html
 %attr(755,root,root) %{_sbindir}/fixparts
-%attr(755,root,root) %{_sbindir}/gdisk
-%attr(755,root,root) %{_sbindir}/sgdisk
+%attr(755,root,root) %{_sbindir}/*gdisk
 %{_mandir}/man8/fixparts.8*
-%{_mandir}/man8/gdisk.8*
-%{_mandir}/man8/sgdisk.8*
+%{_mandir}/man8/*gdisk.8*
