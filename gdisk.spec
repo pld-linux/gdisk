@@ -1,12 +1,12 @@
 Summary:	An fdisk-like partitioning tool for GPT disks
 Summary(pl.UTF-8):	Podobne do fdiska narzędzie do partycjonowania dysków GPT
 Name:		gdisk
-Version:	1.0.4
+Version:	1.0.5
 Release:	1
 License:	GPL v2
 Group:		Base
 Source0:	http://downloads.sourceforge.net/gptfdisk/gptfdisk-%{version}.tar.gz
-# Source0-md5:	5ecc3c44913bb6b53d3708d1ac7ac295
+# Source0-md5:	58dac67c85e46ca87b587231549aefe6
 URL:		http://www.rodsbooks.com/gdisk/
 BuildRequires:	libstdc++-devel
 BuildRequires:	libuuid-devel
