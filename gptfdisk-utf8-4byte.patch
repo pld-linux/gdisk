@@ -1,0 +1,15 @@
+Wrong second byte for 4-byte UTF-8 sequences: partition names with
+characters above U+FFFF were displayed as invalid UTF-8.
+https://sourceforge.net/p/gptfdisk/code/ci/0e13e907ced9981024d0bdec7e2dc1b2081c9cbe/
+
+--- a/gptpart.cc	2024-02-20 01:55:41.000000000 +0100
++++ b/gptpart.cc	2026-10-29 00:51:00.496666666 +0100
+@@ -131,7 +131,7 @@
+       } // if
+       else {
+          utf8 += (char) ( 0xf0 | ( uni >> 18 ) ) ;
+-         utf8 += (char) ( 0xe0 | ( ( uni >> 12 ) & 0x3f ) ) ;
++         utf8 += (char) ( 0x80 | ( ( uni >> 12 ) & 0x3f ) ) ;
+          utf8 += (char) ( 0x80 | ( ( uni >> 6 ) & 0x3f ) ) ;
+          utf8 += (char) ( 0x80 | ( uni & 0x3f ) ) ;
+       } // if
